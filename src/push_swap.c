@@ -19,7 +19,6 @@ int	ft_create_stack(t_list *stack, char *argc);
 int	main(int argv, char **argc)
 {
 	t_list	*stack;
-	int	crt_reslt;
 	int	i;
 
 	if (argv > 0)
