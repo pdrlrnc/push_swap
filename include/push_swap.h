@@ -23,5 +23,7 @@ int	ft_create_stack(t_list **stack, char *argc);
 int	swap_a();
 int	swap_b();
 int	ss();
+int	push_a();
+int	push_b();
 
 #endif

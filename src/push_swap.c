@@ -17,11 +17,13 @@
 int	main(int argv, char **argc)
 {
 	t_list	**stack_a;
+	t_list	**stack_b;
 	int	i;
 
 	if (argv > 1)
 	{
 		stack_a = stack_factory('a');
+		stack_b = stack_factory('b');
 		i = 1;
 		while (i < argv)
 		{
@@ -31,8 +33,18 @@ int	main(int argv, char **argc)
 		}
 		ft_lstprnt(*stack_a);
 		swap_a('a');
-		printf("\nSWAPPED\n");
+		printf("\nSWAPPED A\n");
 		ft_lstprnt(*(stack_factory('a')));
+		fflush(stdout);
+		printf("\n\nPUSHED B\nA: ");
+		fflush(stdout);
+		push_b();
+		ft_lstprnt(*(stack_factory('a')));
+		printf("\nB: ");
+		fflush(stdout);
+		ft_lstprnt(*(stack_factory('b')));
+		printf("\n");
+		
 	}
 }
 

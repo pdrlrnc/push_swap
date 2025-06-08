@@ -9,7 +9,7 @@
 #    Updated: 2025/05/28 16:43:36 by pedde-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-SRC_FILES	= push_swap push_swap_utils moves_swap
+SRC_FILES	= push_swap push_swap_utils moves_swap moves_push
 LIBFT		= libft
 SRC_DIR		= src
 OBJ_DIR		= obj
