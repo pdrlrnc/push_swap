@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstprnt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedde-so <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 15:40:30 by pedde-so          #+#    #+#             */
-/*   Updated: 2025/05/28 15:40:31 by pedde-so         ###   ########.fr       */
+/*   Created: 2025/06/08 13:26:55 by pedde-so          #+#    #+#             */
+/*   Updated: 2025/06/08 13:26:56 by pedde-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+void	ft_lstprnt(t_list *lst)
+{
+	int	i;
 
-int	ft_start_stack(t_list *stack, char *argc);
-int	ft_isspace(char c);
-int	ft_check_if_zero(char *str);
-t_list	**stack_factory(char c);
-int	ft_create_stack(t_list **stack, char *argc);
-int	swap_a();
-int	swap_b();
-int	ss();
-
-#endif
+	write(1, "[", 1);
+	while (lst)
+	{
+		i = *((int *) lst->content);
+		ft_putnbr_fd(i, 1);
+		if (lst->next)
+			write(1, ", ", 2);
+		lst = lst->next;
+	}
+	write(1, "]", 1);
+}

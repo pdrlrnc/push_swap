@@ -9,7 +9,7 @@
 #    Updated: 2025/05/28 16:43:36 by pedde-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-SRC_FILES	= push_swap push_swap_utils
+SRC_FILES	= push_swap push_swap_utils moves_swap
 LIBFT		= libft
 SRC_DIR		= src
 OBJ_DIR		= obj
@@ -30,12 +30,12 @@ $(OBJ_DIR):
 	@mkdir -p $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) -g $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
 	@make -s -C $(LIBFT)
 	@make bonus -s -C $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+	@$(CC) -g $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 clean:
 	@$(RM) $(OBJ_DIR)
