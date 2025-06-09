@@ -35,6 +35,7 @@ int	rrr(void);
 void	choose_algorithm(int elements);
 void	hardcoded_2(void);
 void	hardcoded_3(void);
+void	hardcoded_4(void);
 
 
 #endif

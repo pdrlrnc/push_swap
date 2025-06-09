@@ -44,6 +44,8 @@ void	choose_algorithm(int elements)
 		hardcoded_2();
 	else if (elements == 3)
 		hardcoded_3();
+	else if (elements == 4)
+	 	hardcoded_4();
 }
 
 t_list	**stack_factory(char c)
