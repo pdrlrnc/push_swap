@@ -44,7 +44,48 @@ int	main(int argv, char **argc)
 		fflush(stdout);
 		ft_lstprnt(*(stack_factory('b')));
 		printf("\n");
-		
+		printf("\nROTATING A: \n");
+		fflush(stdout);
+		rotate_a();
+		ft_lstprnt(*(stack_factory('a')));
+		printf("\n");
+		printf("\nROTATING B: \n");
+		fflush(stdout);
+		rotate_b();
+		ft_lstprnt(*(stack_factory('b')));
+		printf("\n");
+		printf("\nROTATING BOTH: \nA: ");
+		fflush(stdout);
+		rr();
+		ft_lstprnt(*(stack_factory('a')));
+		printf("\nB: ");
+		fflush(stdout);
+		ft_lstprnt(*(stack_factory('b')));
+		printf("\n");
+		printf("\n\nPUSHED B\nA: ");
+		fflush(stdout);
+		push_b();
+		ft_lstprnt(*(stack_factory('a')));
+		printf("\nB: ");
+		fflush(stdout);
+		ft_lstprnt(*(stack_factory('b')));
+		printf("\n");
+		printf("\n\nPUSHED B\nA: ");
+		fflush(stdout);
+		push_b();
+		ft_lstprnt(*(stack_factory('a')));
+		printf("\nB: ");
+		fflush(stdout);
+		ft_lstprnt(*(stack_factory('b')));
+		printf("\n");
+		printf("\nROTATING BOTH: \nA: ");
+		fflush(stdout);
+		rr();
+		ft_lstprnt(*(stack_factory('a')));
+		printf("\nB: ");
+		fflush(stdout);
+		ft_lstprnt(*(stack_factory('b')));
+		printf("\n");	
 	}
 }
 
@@ -55,8 +96,9 @@ t_list	**stack_factory(char c)
 
 	if (c == 'a')
 		return (&stack_a);
-	else
+	if (c == 'b')
 		return (&stack_b);
+	return (NULL);
 }
 
 int	ft_create_stack(t_list **stack, char *argc)

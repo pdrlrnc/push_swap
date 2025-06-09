@@ -25,5 +25,8 @@ int	swap_b();
 int	ss();
 int	push_a();
 int	push_b();
+int	rotate_a();
+int	rotate_b();
+int	rr();
 
 #endif
