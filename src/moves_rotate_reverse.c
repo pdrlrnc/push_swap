@@ -40,15 +40,18 @@ static int	rotate_reverse_generic(char c)
 
 int	rra()
 {
+	write(1, "rra\n", 4);
 	return (rotate_reverse_generic('a'));
 }
 
 int	rrb()
 {
+	write(1, "rrb\n", 4);
 	return (rotate_reverse_generic('b'));
 }
 
 int	rrr()
 {
+	write(1, "rrr\n", 4);
 	return (rotate_reverse_generic('a') & rotate_reverse_generic('b'));
 }
