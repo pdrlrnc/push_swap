@@ -35,19 +35,18 @@ static int	swap(char c)
 
 int	swap_a()
 {
+	write(1, "sa\n", 3);
 	return (swap('a'));
 }
 
 int	swap_b()
 {
+	write(1, "sb\n", 3);
 	return (swap('b'));
 }
 
 int	ss()
 {
-	int	res;
-
-	res = swap('a');
-	res = res & swap('b');
-	return (res);
+	write(1, "ss\n", 3);
+	return (swap('a') & swap('b'));
 }

@@ -40,15 +40,18 @@ static int	rotate_generic(char c)
 
 int	rr()
 {
+	write(1, "rr\n", 3);
 	return (rotate_generic('a') & rotate_generic('b'));
 }
 
 int	rotate_b()
 {
+	write(1, "rb\n", 3);
 	return (rotate_generic('b'));
 }
 
 int	rotate_a()
 {
+	write(1, "ra\n", 3);
 	return (rotate_generic('a'));
 }

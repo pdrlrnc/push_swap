@@ -10,26 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+#include "libft.h"
+#include <unistd.h>
 
 int	ft_start_stack(t_list *stack, char *argc);
 int	ft_isspace(char c);
 int	ft_check_if_zero(char *str);
 t_list	**stack_factory(char c);
 int	ft_create_stack(t_list **stack, char *argc);
-int	swap_a();
-int	swap_b();
-int	ss();
-int	push_a();
-int	push_b();
-int	rotate_a();
-int	rotate_b();
-int	rr();
-int	rra();
-int	rrb();
-int	rrr();
+int	swap_a(void);
+int	swap_b(void);
+int	ss(void);
+int	push_a(void);
+int	push_b(void);
+int	rotate_a(void);
+int	rotate_b(void);
+int	rr(void);
+int	rra(void);
+int	rrb(void);
+int	rrr(void);
+void	choose_algorithm(int elements);
+void	hardcoded_2(void);
+
 
 #endif
