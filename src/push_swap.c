@@ -85,7 +85,17 @@ int	main(int argv, char **argc)
 		printf("\nB: ");
 		fflush(stdout);
 		ft_lstprnt(*(stack_factory('b')));
-		printf("\n");	
+		printf("\n");
+		printf("\nREVERSE ROTATING BOTH: \nA: ");
+		fflush(stdout);
+		rrr();
+		ft_lstprnt(*(stack_factory('a')));
+		printf("\nB: ");
+		fflush(stdout);
+		ft_lstprnt(*(stack_factory('b')));
+		printf("\n");
+
+
 	}
 }
 

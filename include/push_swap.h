@@ -28,5 +28,8 @@ int	push_b();
 int	rotate_a();
 int	rotate_b();
 int	rr();
+int	rra();
+int	rrb();
+int	rrr();
 
 #endif
