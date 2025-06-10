@@ -48,11 +48,11 @@ void	hardcoded_3(void)
 	hardcoded_3();
 }
 
-static void	hardcoded_4_continuation(int min_index)
+void	hardcoded_4(void)
 {
-	t_list **stack_b;
+	int	min_index;
 
-	stack_b = stack_factory('b');
+	min_index = get_min_index('a');
 	if (min_index == 1)
 		rotate_a();
 	if (min_index == 2)
@@ -64,27 +64,20 @@ static void	hardcoded_4_continuation(int min_index)
 	push_a();
 }
 
-void	hardcoded_4(void)
+void	hardcoded_5(void)
 {
-	t_list	**stack_a;
-	t_list	*curr;
-	int	i;
 	int	min_index;
-	int	min;
 
-	stack_a = stack_factory('a');
-	curr = *stack_a;
-	min = *((int *)(*stack_a)->content);
-	i = 0;
-	while (curr)
-	{
-		if (*((int *)curr->content) < min)
-		{
-			min_index = i;
-			min = *((int *)curr->content);
-		}
-		curr = curr->next;
-		i++;
-	}
-	hardcoded_4_continuation(min_index);
+	min_index = get_min_index('a');
+	if (min_index == 1)
+		rotate_a();
+	if (min_index == 2)
+		rotate_a();
+	if (min_index == 3)
+		rra();
+	if (min_index == 4)
+		rra();
+	push_b();
+	hardcoded_4();
+	push_a();
 }

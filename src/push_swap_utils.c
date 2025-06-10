@@ -40,3 +40,27 @@ int	ft_check_if_zero(char *str)
 	}
 	return (0);
 }
+
+int	get_min_index(char c)
+{
+	t_list	*curr;
+	int	min;
+	int	min_index;
+	int	i;
+
+	curr = *(stack_factory(c));
+	min = *((int *)(curr)->content);
+	min_index = 0;
+	i = 0;
+	while (curr)
+	{
+		if (*((int *)curr->content) < min)
+		{
+			min_index = i;
+			min = *((int *)curr->content);
+		}
+		curr = curr->next;
+		i++;
+	}
+	return (min_index);
+}

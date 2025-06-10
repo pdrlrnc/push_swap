@@ -16,25 +16,21 @@
 
 int	main(int argv, char **argc)
 {
-	t_list	**stack_a;
-	t_list	**stack_b;
 	int	i;
 
 	if (argv > 1)
 	{
-		stack_a = stack_factory('a');
-		stack_b = stack_factory('b');
 		i = 1;
 		while (i < argv)
 		{
-			if (!ft_create_stack(stack_a, argc[i]))
+			if (!ft_create_stack(stack_factory('a'), argc[i]))
 				printf("Error\n");
 			i++;
 		}
 		ft_lstprnt(*stack_factory('a'));
 		choose_algorithm(--argv);
 		ft_lstprnt(*stack_factory('a'));
-	
+		ft_lstprnt(*stack_factory('b'));	
 	}
 }
 
@@ -46,6 +42,8 @@ void	choose_algorithm(int elements)
 		hardcoded_3();
 	else if (elements == 4)
 	 	hardcoded_4();
+	else if (elements == 5)
+		hardcoded_5();
 }
 
 t_list	**stack_factory(char c)

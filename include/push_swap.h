@@ -19,6 +19,7 @@
 int	ft_start_stack(t_list *stack, char *argc);
 int	ft_isspace(char c);
 int	ft_check_if_zero(char *str);
+int	get_min_index(char c);
 t_list	**stack_factory(char c);
 int	ft_create_stack(t_list **stack, char *argc);
 int	swap_a(void);
@@ -36,6 +37,6 @@ void	choose_algorithm(int elements);
 void	hardcoded_2(void);
 void	hardcoded_3(void);
 void	hardcoded_4(void);
-
+void	hardcoded_5(void);
 
 #endif
