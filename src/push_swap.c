@@ -53,10 +53,10 @@ int	main(int argv, char **argc)
 		}
 		if (valid && ft_input_is_valid())
 		{
-			ft_lstprnt(*stack_factory('a'));
+//			ft_lstprnt(*stack_factory('a'));
 			choose_algorithm(--argv);
-			ft_lstprnt(*stack_factory('a'));
-			ft_lstprnt(*stack_factory('b'));
+//			ft_lstprnt(*stack_factory('a'));
+//			ft_lstprnt(*stack_factory('b'));
 		}
 	}
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 /*prototypes*/
 static int	ft_trims_front(char const *s1, char const *set);

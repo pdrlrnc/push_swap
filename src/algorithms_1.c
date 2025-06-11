@@ -72,9 +72,15 @@ void	hardcoded_5(void)
 	if (min_index == 1)
 		rotate_a();
 	if (min_index == 2)
+	{
 		rotate_a();
+		rotate_a();
+	}
 	if (min_index == 3)
+	{
 		rra();
+		rra();
+	}
 	if (min_index == 4)
 		rra();
 	push_b();

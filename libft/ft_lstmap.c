@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
 /*prototypes*/
 static t_list	*ft_cleanup(t_list *lst, t_list *new_node, void (*del)(void *));
