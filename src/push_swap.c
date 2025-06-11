@@ -71,7 +71,7 @@ int	ft_create_stack(t_list **stack, char *argc)
 		if (*stack == NULL)
 			*stack = ft_lstnew(nb);
 		else
-			ft_lstadd_back(&(*stack), ft_lstnew(&nb));
+			ft_lstadd_back(stack, ft_lstnew(nb));
 	}
 	else
 	{
@@ -84,7 +84,7 @@ int	ft_create_stack(t_list **stack, char *argc)
 		if (stack == NULL)
 			*stack = ft_lstnew(nb);
 		else
-			ft_lstadd_back(&(*stack), ft_lstnew(nb));
+			ft_lstadd_back(stack, ft_lstnew(nb));
 	}
 	if (!*stack)
 		return (free(nb),(0));
