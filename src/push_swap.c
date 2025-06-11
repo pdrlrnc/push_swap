@@ -56,7 +56,7 @@ int	main(int argv, char **argc)
 		}
 		ft_lstclear(stack_factory('a'), free);
 		ft_lstclear(stack_factory('b'), free);
-		//ft_lstclear(stack_factory('c'), free);
+		ft_lstclear(stack_factory('c'), free);
 	}
 }
 
@@ -112,6 +112,7 @@ t_list	**stack_factory(char c)
 int	ft_create_stack(char *argc)
 {
 	int	*nb;
+	int	*nb_cpy;
 	t_list	**stack;
 	t_list	**stack_cpy;
 
@@ -122,16 +123,20 @@ int	ft_create_stack(char *argc)
 		nb = malloc(sizeof(int));
 		if (!nb)
 			return (0);
+		nb_cpy = malloc(sizeof(int));
+		if (!nb_cpy)
+			return (free(nb), 0);
 		*nb = 0;
+		*nb_cpy = 0;
 		if (*stack == NULL)
 		{
 			*stack = ft_lstnew(nb);
-			*stack_cpy = ft_lstnew(nb);
+			*stack_cpy = ft_lstnew(nb_cpy);
 		}
 		else
 		{
 			ft_lstadd_back(stack, ft_lstnew(nb));
-			ft_lstadd_back(stack_cpy, ft_lstnew(nb));
+			ft_lstadd_back(stack_cpy, ft_lstnew(nb_cpy));
 		}
 	}
 	else
@@ -139,20 +144,24 @@ int	ft_create_stack(char *argc)
 		nb = malloc(sizeof(int));
 		if (!nb)
 			return (0);
+		nb_cpy = malloc(sizeof(int));
+		if (!nb_cpy)
+			return (0);
 		if (ft_atoi(argc) > INT_MAX || ft_atoi(argc) < INT_MIN)
-			return (free(nb), 0);
+			return (free(nb), free(nb_cpy), 0);
 		*nb = ft_atoi(argc);
 		if (*nb == 0)
 			return (free(nb), 0);
+		*nb_cpy = ft_atoi(argc);
 		if (stack == NULL)
 		{
 			*stack = ft_lstnew(nb);
-			*stack_cpy = ft_lstnew(nb);
+			*stack_cpy = ft_lstnew(nb_cpy);
 		}
 		else
 		{
 			ft_lstadd_back(stack, ft_lstnew(nb));
-			ft_lstadd_back(stack_cpy, ft_lstnew(nb));
+			ft_lstadd_back(stack_cpy, ft_lstnew(nb_cpy));
 		}
 	}
 	if (!*stack)

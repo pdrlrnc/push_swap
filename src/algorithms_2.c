@@ -55,5 +55,6 @@ int	*normalize_input(void)
 		j++;
 		stack_a_cpy = stack_a_cpy->next;
 	}
+	return (normalized);
 }
 
