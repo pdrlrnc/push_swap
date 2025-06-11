@@ -12,7 +12,6 @@
 
 #include "../include/libft.h"
 #include "../include/push_swap.h"
-#include <stdio.h>
 
 int	main(int argv, char **argc)
 {
@@ -32,7 +31,7 @@ int	main(int argv, char **argc)
 				if(!ft_create_stack(stack_factory('a'), inputs[i]))
 				{	
 					valid = 0;
-					printf("Error\n");
+					write(1, "Error\n", 6);
 				}
 				i++;
 			}
@@ -46,7 +45,7 @@ int	main(int argv, char **argc)
 				if (!ft_create_stack(stack_factory('a'), argc[i]))
 				{
 					valid = 0;
-					printf("Error\n");
+					write(1, "Error\n", 6);
 				}
 				i++;
 			}
@@ -58,11 +57,28 @@ int	main(int argv, char **argc)
 //			ft_lstprnt(*stack_factory('a'));
 //			ft_lstprnt(*stack_factory('b'));
 		}
+		ft_lstclear(stack_factory('a'), free);
+		ft_lstclear(stack_factory('b'), free);
 	}
 }
 
 int	ft_input_is_valid(void)
 {
+	t_list	*inner_stack;
+	t_list	*outter_stack;
+
+	outter_stack = *(stack_factory('a'));
+	while (outter_stack)
+	{
+		inner_stack = outter_stack->next;
+		while (inner_stack)
+		{
+			if (*(int *)(outter_stack->content) == *(int *)(inner_stack->content))
+				return (write(1, "Error\n", 6), 0);
+			inner_stack = inner_stack->next;
+		}
+		outter_stack = outter_stack->next;
+	}
 	return (1);
 }
 

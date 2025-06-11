@@ -12,11 +12,5 @@
 
 t_list	*ft_lstcpy(t_list *lst)
 {
-	t_list	*cpy;
-	t_list	*curr;
-
-	if (!lst)
-		return (NULL);
-	cpy = ft_lstnew(
-
+	return (NULL);
 }
