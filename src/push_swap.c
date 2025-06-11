@@ -17,21 +17,53 @@
 int	main(int argv, char **argc)
 {
 	int	i;
+	char	**inputs;
+	int	valid;
 
 	if (argv > 1)
 	{
-		i = 1;
-		while (i < argv)
+		valid = 1;
+		if (argv == 2)
 		{
-			if (!ft_create_stack(stack_factory('a'), argc[i]))
-				printf("Error\n");
-			i++;
+			i = 0;
+			inputs = ft_split(argc[1], ' ');
+			while (inputs[i] != NULL && valid)
+			{
+				if(!ft_create_stack(stack_factory('a'), inputs[i]))
+				{	
+					valid = 0;
+					printf("Error\n");
+				}
+				i++;
+			}
+			argv = i + 1;
 		}
-		ft_lstprnt(*stack_factory('a'));
-		choose_algorithm(--argv);
-		ft_lstprnt(*stack_factory('a'));
-		ft_lstprnt(*stack_factory('b'));	
+		else
+		{
+			i = 1;
+			while (i < argv && valid)
+			{
+				if (!ft_create_stack(stack_factory('a'), argc[i]))
+				{
+					valid = 0;
+					printf("Error\n");
+				}
+				i++;
+			}
+		}
+		if (valid && ft_input_is_valid())
+		{
+			ft_lstprnt(*stack_factory('a'));
+			choose_algorithm(--argv);
+			ft_lstprnt(*stack_factory('a'));
+			ft_lstprnt(*stack_factory('b'));
+		}
 	}
+}
+
+int	ft_input_is_valid(void)
+{
+	return (1);
 }
 
 void	choose_algorithm(int elements)
@@ -78,6 +110,8 @@ int	ft_create_stack(t_list **stack, char *argc)
 		nb = malloc(sizeof(int));
 		if (!nb)
 			return (0);
+		if (ft_atoi(argc) > INT_MAX || ft_atoi(argc) < INT_MIN)
+			return (free(nb), 0);
 		*nb = ft_atoi(argc);
 		if (*nb == 0)
 			return (free(nb), 0);

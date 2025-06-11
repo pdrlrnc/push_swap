@@ -15,6 +15,7 @@
 
 #include "libft.h"
 #include <unistd.h>
+#include <limits.h>
 
 int	ft_start_stack(t_list *stack, char *argc);
 int	ft_isspace(char c);
@@ -38,5 +39,6 @@ void	hardcoded_2(void);
 void	hardcoded_3(void);
 void	hardcoded_4(void);
 void	hardcoded_5(void);
+int	ft_input_is_valid(void);
 
 #endif
