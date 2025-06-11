@@ -64,3 +64,47 @@ int	get_min_index(char c)
 	}
 	return (min_index);
 }
+
+void	bubble_sort_cpy(void)
+{
+	int	sorted;
+	t_list	*prev;
+	t_list	*curr;
+	t_list	*next;
+	t_list	*aux;
+
+	sorted = 0;
+	while (!sorted)
+	{
+		sorted = 1;
+		prev = NULL;
+		curr = *(stack_factory('c'));
+		next = (*(stack_factory('c')))->next;
+		while (next)
+		{
+			if ((*(int *)curr->content) > (*(int *)next->content))
+			{
+				sorted = 0;
+				if (prev == NULL)
+				{
+					curr->next = next->next;
+					next->next = curr;
+					*(stack_factory('c')) = next;
+				}
+				else
+				{
+					aux = next->next;
+					prev->next = next;
+					next->next = curr;
+					curr->next = aux;
+				}
+			}
+			if (prev == NULL)
+				prev = *(stack_factory('c'));
+			else
+				prev = curr;
+			curr = next;
+			next = next->next;
+		}	
+	}
+}

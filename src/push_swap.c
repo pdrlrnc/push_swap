@@ -28,7 +28,7 @@ int	main(int argv, char **argc)
 			inputs = ft_split(argc[1], ' ');
 			while (inputs[i] != NULL && valid)
 			{
-				if(!ft_create_stack(stack_factory('a'), inputs[i]))
+				if(!ft_create_stack(inputs[i]))
 				{	
 					valid = 0;
 					write(1, "Error\n", 6);
@@ -42,7 +42,7 @@ int	main(int argv, char **argc)
 			i = 1;
 			while (i < argv && valid)
 			{
-				if (!ft_create_stack(stack_factory('a'), argc[i]))
+				if (!ft_create_stack(argc[i]))
 				{
 					valid = 0;
 					write(1, "Error\n", 6);
@@ -52,13 +52,11 @@ int	main(int argv, char **argc)
 		}
 		if (valid && ft_input_is_valid())
 		{
-//			ft_lstprnt(*stack_factory('a'));
 			choose_algorithm(--argv);
-//			ft_lstprnt(*stack_factory('a'));
-//			ft_lstprnt(*stack_factory('b'));
 		}
 		ft_lstclear(stack_factory('a'), free);
 		ft_lstclear(stack_factory('b'), free);
+		//ft_lstclear(stack_factory('c'), free);
 	}
 }
 
@@ -92,24 +90,33 @@ void	choose_algorithm(int elements)
 	 	hardcoded_4();
 	else if (elements == 5)
 		hardcoded_5();
+	else if (elements < 100)
+		chunked_insertion_sort();
 }
 
 t_list	**stack_factory(char c)
 {
 	static	t_list *stack_a;
 	static	t_list *stack_b;
+	static	t_list *stack_a_cpy;
 
 	if (c == 'a')
 		return (&stack_a);
 	if (c == 'b')
 		return (&stack_b);
+	if (c == 'c')
+		return (&stack_a_cpy);
 	return (NULL);
 }
 
-int	ft_create_stack(t_list **stack, char *argc)
+int	ft_create_stack(char *argc)
 {
 	int	*nb;
+	t_list	**stack;
+	t_list	**stack_cpy;
 
+	stack = stack_factory('a');
+	stack_cpy = stack_factory('c');
 	if (ft_check_if_zero(argc))
 	{
 		nb = malloc(sizeof(int));
@@ -117,9 +124,15 @@ int	ft_create_stack(t_list **stack, char *argc)
 			return (0);
 		*nb = 0;
 		if (*stack == NULL)
+		{
 			*stack = ft_lstnew(nb);
+			*stack_cpy = ft_lstnew(nb);
+		}
 		else
+		{
 			ft_lstadd_back(stack, ft_lstnew(nb));
+			ft_lstadd_back(stack_cpy, ft_lstnew(nb));
+		}
 	}
 	else
 	{
@@ -132,9 +145,15 @@ int	ft_create_stack(t_list **stack, char *argc)
 		if (*nb == 0)
 			return (free(nb), 0);
 		if (stack == NULL)
+		{
 			*stack = ft_lstnew(nb);
+			*stack_cpy = ft_lstnew(nb);
+		}
 		else
+		{
 			ft_lstadd_back(stack, ft_lstnew(nb));
+			ft_lstadd_back(stack_cpy, ft_lstnew(nb));
+		}
 	}
 	if (!*stack)
 		return (free(nb),(0));
