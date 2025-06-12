@@ -65,6 +65,28 @@ static void	push_back(void)
 
 }
 
+int	*re_normalize(int i, int size, int **normalized)
+{
+	int	*res;
+	int	j;
+	int	k;
+
+	res = malloc(sizeof(int) * (size - 1));
+	j = 0;
+	k = 0;
+	while (j < size)
+	{
+		if (j != i)
+		{
+			*(res + k) = *normalized[j];
+			k++;
+		}
+		j++;
+	}
+	free(*normalized);
+	return (res);
+}
+
 void	chunked_insertion_sort(void)
 {
 	int	*normalized;
@@ -73,6 +95,7 @@ void	chunked_insertion_sort(void)
 	int	i;
 	int	k;
 	int	size;
+	int	curr_size;
 
 	normalized = normalize_input();
 	chunk_min = 0;
@@ -80,6 +103,7 @@ void	chunked_insertion_sort(void)
 	i = 0;
 	k = 0;
 	size = ft_lstsize(*stack_factory('a'));
+	curr_size = size;
 	while (chunk_max < size)
 	{
 		while (k <= chunk_max)
@@ -88,9 +112,12 @@ void	chunked_insertion_sort(void)
 			{	
 				k++;
 				value_found(i, size);
-				free(normalized);
-				normalized = NULL;
-				normalized = normalize_input();
+				//after i find a value i should get it out of
+				//normalized because i also got it out of the
+				//curr_size = size;
+				//a array.
+				normalized = re_normalize(i, curr_size, &normalized); 
+				curr_size--;
 				i = 0;
 			}
 			i++;
@@ -117,30 +144,37 @@ int	*normalize_input(void)
 	ft_lstprnt(stack_a);
 	bubble_sort_cpy();
 	stack_a_cpy = *stack_factory('c');
-	write(1, "\nC:", 4);
+	write(1, "\nC:", 3);
 	ft_lstprnt(stack_a_cpy);
-	lst_size = ft_lstsize(stack_a) + 1;
+	lst_size = ft_lstsize(stack_a);
+	write(1, "\n", 1);
+	write(1, "\n", 1);
+	write(1, "\n", 1);
+	ft_putnbr_fd(lst_size, 1);
+	write(1, "\n", 1);
+	write(1, "\n", 1);
+	write(1, "\n", 1);
 	normalized = malloc(sizeof(int) * lst_size);
 	if (!normalized)
 		return (NULL);
 	j = 0;
-	while (stack_a_cpy)
+	while (stack_a)
 	{
 		i = 0;
-		stack_a = *stack_factory('a');
-		while (stack_a)
+		stack_a_cpy = *stack_factory('c');
+		while (stack_a_cpy)
 		{
 			if ((*(int *)stack_a_cpy->content) == (*(int *)stack_a->content))
 				break;
 			i++;
-			stack_a = stack_a->next;
+			stack_a_cpy = stack_a_cpy->next;
 		}
-		normalized[i] = j;
+		*(normalized + j) = i;
 		j++;
-		stack_a_cpy = stack_a_cpy->next;
+		stack_a = stack_a->next;
 	}
 	i = 0;
-	write(1, "\nN[ ", 8);
+	write(1, "\nN [ ", 5);
 	while (i < lst_size)
 	{
 		ft_putnbr_fd(*(normalized + i), 1);
