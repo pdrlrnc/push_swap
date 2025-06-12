@@ -27,11 +27,42 @@ static	void value_found(int i, int size)
 
 		push_b();
 	}
-	write(1, "After value found I got:\nA:", 27); 
+	write(1, "\nAfter value found I got:\nA:", 28); 
 	ft_lstprnt(*stack_factory('a'));
 	write(1, "\nB:\n", 4);
 	ft_lstprnt(*stack_factory('b'));
 	write(1, "\n", 1);
+}
+
+static void	push_back(void)
+{
+	int	min;
+
+	min = get_min_index('b');
+	if (min == 1)
+		rotate_b();
+	if (min == 2)
+		rrb();
+	if (min == 2 || min == 3)
+		rrb();
+	push_a();
+	min = get_min_index('b');
+	if (min == 1)
+		rotate_b();
+	if (min == 2)
+		rrb();
+	push_a();
+	min = get_min_index('b');
+	if(min == 1)
+		rotate_b();
+	push_a();
+	push_a();
+	write(1, "\nAfter push_back I got:\nA:", 28); 
+	ft_lstprnt(*stack_factory('a'));
+	write(1, "\nB:\n", 4);
+	ft_lstprnt(*stack_factory('b'));
+	write(1, "\n", 1);
+
 }
 
 void	chunked_insertion_sort(void)
@@ -57,10 +88,14 @@ void	chunked_insertion_sort(void)
 			{	
 				k++;
 				value_found(i, size);
+				free(normalized);
+				normalized = NULL;
+				normalized = normalize_input();
 				i = 0;
 			}
 			i++;
 		}
+		push_back();
 		chunk_min += 4;
 		chunk_max += 4;	
 		if (chunk_max >= size)
@@ -77,12 +112,14 @@ int	*normalize_input(void)
 	t_list	*stack_a_cpy;
 	int	lst_size;
 
+	write(1, "\nIN NORM:\nA:", 12);
 	stack_a = *stack_factory('a');
-	ft_lstprnt(*stack_factory('c'));
+	ft_lstprnt(stack_a);
 	bubble_sort_cpy();
-	ft_lstprnt(*stack_factory('c'));
 	stack_a_cpy = *stack_factory('c');
-	lst_size = ft_lstsize(stack_a);
+	write(1, "\nC:", 4);
+	ft_lstprnt(stack_a_cpy);
+	lst_size = ft_lstsize(stack_a) + 1;
 	normalized = malloc(sizeof(int) * lst_size);
 	if (!normalized)
 		return (NULL);
@@ -102,9 +139,8 @@ int	*normalize_input(void)
 		j++;
 		stack_a_cpy = stack_a_cpy->next;
 	}
-
 	i = 0;
-	write(1, "\nNorm: [ ", 8);
+	write(1, "\nN[ ", 8);
 	while (i < lst_size)
 	{
 		ft_putnbr_fd(*(normalized + i), 1);
@@ -113,7 +149,6 @@ int	*normalize_input(void)
 			write(1, ", ", 2);
 	}
 	write(1, "]\n", 2);
-
 	return (normalized);
 }
 

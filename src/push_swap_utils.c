@@ -65,6 +65,22 @@ int	get_min_index(char c)
 	return (min_index);
 }
 
+static void	copy_a(void)
+{
+	t_list	*curr_a;
+	t_list	*curr_cpy;
+
+	curr_a = *(stack_factory('a'));
+	curr_cpy = *(stack_factory('c'));
+	while (curr_a)
+	{
+		(*(int *)(curr_cpy->content)) = *((int *)(curr_a->content));
+
+		curr_a = curr_a->next;
+		curr_cpy = curr_cpy->next;
+	}
+}
+
 void	bubble_sort_cpy(void)
 {
 	int	sorted;
@@ -72,7 +88,8 @@ void	bubble_sort_cpy(void)
 	t_list	*curr;
 	t_list	*next;
 	t_list	*aux;
-
+	
+	copy_a();
 	sorted = 0;
 	while (!sorted)
 	{
@@ -108,3 +125,5 @@ void	bubble_sort_cpy(void)
 		}	
 	}
 }
+
+
