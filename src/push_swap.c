@@ -91,7 +91,7 @@ void	choose_algorithm(int elements)
 	else if (elements == 5)
 		hardcoded_5();
 	else if (elements < 100)
-		chunked_insertion_sort();
+		chunked_insertion_sort(4);
 }
 
 t_list	**stack_factory(char c)

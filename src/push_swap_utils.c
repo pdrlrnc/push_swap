@@ -41,6 +41,30 @@ int	ft_check_if_zero(char *str)
 	return (0);
 }
 
+int	get_max_index(char c)
+{
+	t_list	*curr;
+	int	max;
+	int	max_index;
+	int	i;
+
+	curr = *(stack_factory(c));
+	max = *((int *)(curr)->content);
+	max_index = 0;
+	i = 0;
+	while (curr)
+	{
+		if (*((int *)curr->content) > max)
+		{
+			max_index = i;
+			max = *((int *)curr->content);
+		}
+		curr = curr->next;
+		i++;
+	}
+	return (max_index);
+}
+
 int	get_min_index(char c)
 {
 	t_list	*curr;

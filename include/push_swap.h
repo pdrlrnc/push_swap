@@ -21,6 +21,7 @@ int	ft_start_stack(t_list *stack, char *argc);
 int	ft_isspace(char c);
 int	ft_check_if_zero(char *str);
 int	get_min_index(char c);
+int	get_max_index(char c);
 t_list	**stack_factory(char c);
 int	ft_create_stack(char *argc);
 int	swap_a(void);
@@ -41,7 +42,9 @@ void	hardcoded_4(void);
 void	hardcoded_5(void);
 int	ft_input_is_valid(void);
 void	bubble_sort_cpy(void);
-void	chunked_insertion_sort(void);
+void	chunked_insertion_sort(int chunk_size);
 int	*normalize_input(void);
+void	found_value(int i, int size, int **normalized);
+void	push_back(int **normalized, int size, int elems);
 
 #endif
