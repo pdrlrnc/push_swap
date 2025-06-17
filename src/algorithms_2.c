@@ -64,7 +64,7 @@ void	chunked_insertion_sort(int chunk_size)
 	debug_iteration = 0;
 	while (chunk_max > 0)
 	{
-		chunk_min = (chunk_max - chunk_size);
+		chunk_min = ((chunk_max - chunk_size) + 1);
 		if (chunk_min < 0)
 			chunk_min = 0;
 		i = 0;
@@ -87,11 +87,17 @@ void	chunked_insertion_sort(int chunk_size)
 		printf("\n\t\t->B:");
 		fflush(stdout);
 		ft_lstprnt(*stack_factory('b'));
-		debug_iteration++;
 		chunk_max -= chunk_size;
 		push_back(&normalized, curr_size, found);
-	}
+		printf("\n\n\t\t->DEBUG: ITERATION %d, [AFTER PUSH_BACK] A:", debug_iteration);
+		fflush(stdout);
+		ft_lstprnt(*stack_factory('a'));
+		printf("\n\t\t->B:");
+		fflush(stdout);
+		ft_lstprnt(*stack_factory('b'));
 
+		debug_iteration++;
+	}
 	write(1, "\nAfter Chunk\n A:", 16);
 	ft_lstprnt(*stack_factory('a'));
 	write(1, "\nB:", 3);
@@ -103,36 +109,33 @@ void	chunked_insertion_sort(int chunk_size)
 void	push_back(int **normalized, int size, int elems)
 {
 	int	max_index;
-	int	*result;
-	int	i;
-	int	j;
+	int	*res;
 	int	aux;
+	int	i;
 
-	max_index = get_max_index('b');
-	if (max_index < (elems / 2))
-	{
-		while (max_index--)
-			rotate_b();
-	}
-	else
-	{
-		while (max_index++ < elems)
-			rrb();
-	}
 	aux = elems;
-	while (aux--)
-		push_a();
-	result = malloc(sizeof(int) * (size + elems));
-	if (!result)
+	res = malloc(sizeof(int) * (size + elems));
+	if (!res)
 		return ;
+	while (aux--)
+	{
+		max_index = get_max_index('b');
+		if ((max_index / 2) < aux)
+			while (max_index--)
+				rotate_b();
+		else
+			while (max_index++ < aux)
+				rrb();
+		push_a();
+	}
+	aux = 0;
+	while (aux < elems)
+		*(res + aux++) = INT_MAX;
 	i = 0;
-	while (i < elems)
-		*(result + i++) = INT_MAX;
-	j = 0;
-	while (j < size)
-		*(result + i++) = (*normalized)[j++];
+	while (aux < (size + elems))
+		*(res + aux++) = (*normalized)[i++];
 	free(*normalized);
-	*normalized = result;
+	*normalized = res;
 }
 
 static void	push_b_norm(int **normalized, int size)

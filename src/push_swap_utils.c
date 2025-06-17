@@ -13,6 +13,20 @@
 #include "../include/libft.h"
 #include "../include/push_swap.h"
 
+int	is_ordered(char c)
+{
+	t_list	*head;
+
+	head = *stack_factory(c);
+	while (head->next)
+	{
+		if (head->content > (head->next)->content)
+			return (0);
+		head = head->next;
+	}
+	return (1);
+}
+
 int	ft_isspace(char c)
 {
 	if (c == ' ' || c == '\f' || c == '\n')
