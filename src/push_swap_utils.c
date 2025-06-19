@@ -164,4 +164,10 @@ void	bubble_sort_cpy(void)
 	}
 }
 
-
+void	add_move(char *move)
+{
+	if (!stack_factory('m'))
+		*stack_factory('m') = ft_lstnew(move);
+	else
+		ft_lstadd_back(stack_factory('m'), ft_lstnew(move));
+}

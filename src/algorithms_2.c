@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include <stdio.h>
 
 int	*normalize_input(void)
 {
@@ -54,15 +53,15 @@ void	chunked_insertion_sort(int chunk_size)
 	int	curr_size;
 	int	i;
 	int	found;
-	int	debug_iteration;
 	int	top;
+	int	first;
 
 	normalized = normalize_input();
 	if (!normalized)
 		return ;
 	lst_size = ft_lstsize(*stack_factory('a'));
 	chunk_max = lst_size - 1;
-	debug_iteration = 0;
+	first = 1;
 	while (chunk_max >= 0)
 	{
 		chunk_min = ((chunk_max - chunk_size) + 1);
@@ -76,35 +75,17 @@ void	chunked_insertion_sort(int chunk_size)
 			if (*(normalized + i) >= chunk_min && *(normalized + i) <= chunk_max)
 			{
 				top = (*normalized);
-				printf("\n\n\tMY TOP: %d\n\n\t", top);
-				found_value(i, curr_size, &normalized, top);
+				found_value(i, curr_size, &normalized, top, first);
 				curr_size--;
 				found++;
 				i = -1;
 			}
 			i++;
 		}
-		printf("\n\n\t\t->DEBUG: ITERATION %d, A:", debug_iteration);
-		fflush(stdout);
-		ft_lstprnt(*stack_factory('a'));
-		printf("\n\t\t->B:");
-		fflush(stdout);
-		ft_lstprnt(*stack_factory('b'));
+		first = 0;
 		chunk_max -= chunk_size;
 		push_back(&normalized, curr_size, found);
-		printf("\n\n\t\t->DEBUG: ITERATION %d, [AFTER PUSH_BACK] A:", debug_iteration);
-		fflush(stdout);
-		ft_lstprnt(*stack_factory('a'));
-		printf("\n\t\t->B:");
-		fflush(stdout);
-		ft_lstprnt(*stack_factory('b'));
-
-		debug_iteration++;
 	}
-	write(1, "\nAfter Chunk\n A:", 16);
-	ft_lstprnt(*stack_factory('a'));
-	write(1, "\nB:", 3);
-	ft_lstprnt(*stack_factory('b'));
 	free(normalized);
 	
 }
@@ -161,19 +142,6 @@ static void	push_b_norm(int **normalized, int size)
 	}	
 	free(*normalized);
 	*normalized = result;
-
-
-	write(1, "\nAfter PushB\n N: [", 18);
-	i = 0;
-	while ( i < (size - 1))
-	{
-		ft_putnbr_fd(*(result + i), 1);
-		i++;
-		if (i < (size - 1))
-			write(1, " ,", 2);
-	}
-	write(1, "]\n\n", 3);
-
 }
 
 static void	reverse_rotate_normalization(int **normalized, int size)
@@ -205,10 +173,10 @@ static void	rotate_normalization(int **normalized, int size)
 	(*normalized)[size - 1] = aux;
 }
 
-void	found_value(int i, int size, int **normalized, int top)
+void	found_value(int i, int size, int **normalized, int top, int first)
 {
 	int	rotations;
-
+	
 	rotations = 0;
 	if (i <= (size / 2))
 	{
@@ -231,13 +199,8 @@ void	found_value(int i, int size, int **normalized, int top)
 	push_b();
 	push_b_norm(normalized, size);
 	size--;
-	printf("\n\nENTERING REARRANGE\n\n");
-	ft_lstprnt(*stack_factory('a'));
-	printf("\n\n");
-	rearrange(rotations, normalized, size, top);
-	printf("\n\nLEFT REARRANGE\n\n");
-	ft_lstprnt(*stack_factory('a'));
-	printf("\n\n");
+	if (!first)
+		rearrange(rotations, normalized, size, top);
 }
 
 void	rearrange(int rotations, int **normalized, int size, int top)

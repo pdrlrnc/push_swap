@@ -35,18 +35,42 @@ static int	swap(char c)
 
 int	swap_a()
 {
-	write(1, "sa\n", 3);
+	char	*move;
+
+	move = malloc(3);
+	if (!move)
+		return (0);
+	*move = 's';
+	*(move + 1) = 'a';
+	*(move + 2) = '\0';
+	add_move(move);
 	return (swap('a'));
 }
 
 int	swap_b()
 {
-	write(1, "sb\n", 3);
+	char	*move;
+
+	move = malloc(3);
+	if (!move)
+		return (0);
+	*move = 's';
+	*(move + 1) = 'b';
+	*(move + 2) = '\0';
+	add_move(move);
 	return (swap('b'));
 }
 
 int	ss()
 {
-	write(1, "ss\n", 3);
+	char	*move;
+
+	move = malloc(3);
+	if (!move)
+		return (0);
+	*move = 's';
+	*(move + 1) = 's';
+	*(move + 2) = '\0';
+	add_move(move);
 	return (swap('a') & swap('b'));
 }

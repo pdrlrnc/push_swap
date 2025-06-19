@@ -13,6 +13,11 @@
 #include "../include/libft.h"
 #include "../include/push_swap.h"
 
+static void  putstr_wrapper(void *content)
+{
+    ft_putstr((char *)content);
+}
+
 int	main(int argv, char **argc)
 {
 	int	i;
@@ -54,6 +59,7 @@ int	main(int argv, char **argc)
 		{
 			choose_algorithm(--argv);
 		}
+		ft_lstiter(*stack_factory('m'), putstr_wrapper);
 		ft_lstclear(stack_factory('a'), free);
 		ft_lstclear(stack_factory('b'), free);
 		ft_lstclear(stack_factory('c'), free);
@@ -99,6 +105,7 @@ t_list	**stack_factory(char c)
 	static	t_list *stack_a;
 	static	t_list *stack_b;
 	static	t_list *stack_a_cpy;
+	static	t_list	*moves;
 
 	if (c == 'a')
 		return (&stack_a);
@@ -106,6 +113,8 @@ t_list	**stack_factory(char c)
 		return (&stack_b);
 	if (c == 'c')
 		return (&stack_a_cpy);
+	if (c == 'm')
+		return (&moves);
 	return (NULL);
 }
 

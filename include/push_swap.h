@@ -44,9 +44,10 @@ int	ft_input_is_valid(void);
 void	bubble_sort_cpy(void);
 void	chunked_insertion_sort(int chunk_size);
 int	*normalize_input(void);
-void	found_value(int i, int size, int **normalized, int top);
+void	found_value(int i, int size, int **normalized, int top, int first);
 void	push_back(int **normalized, int size, int elems);
 int	is_ordered(char c);
 void	rearrange(int rotations, int **normalized, int size, int top);
+void	add_move(char *move);
 
 #endif

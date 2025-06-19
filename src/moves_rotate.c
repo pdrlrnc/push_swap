@@ -40,18 +40,42 @@ static int	rotate_generic(char c)
 
 int	rr()
 {
-	write(1, "rr\n", 3);
+	char	*move;
+
+	move = malloc(3);
+	if (!move)
+		return (0);
+	*move = 'r';
+	*(move + 1) = 'r';
+	*(move + 2) = '\0';
+	add_move(move);
 	return (rotate_generic('a') & rotate_generic('b'));
 }
 
 int	rotate_b()
 {
-	write(1, "rb\n", 3);
+	char	*move;
+
+	move = malloc(3);
+	if (!move)
+		return (0);
+	*move = 'r';
+	*(move + 1) = 'b';
+	*(move + 2) = '\0';
+	add_move(move);
 	return (rotate_generic('b'));
 }
 
 int	rotate_a()
 {
-	write(1, "ra\n", 3);
+	char	*move;
+
+	move = malloc(3);
+	if (!move)
+		return (0);
+	*move = 'r';
+	*(move + 1) = 'a';
+	*(move + 2) = '\0';
+	add_move(move);
 	return (rotate_generic('a'));
 }
