@@ -47,5 +47,6 @@ int	*normalize_input(void);
 void	found_value(int i, int size, int **normalized);
 void	push_back(int **normalized, int size, int elems);
 int	is_ordered(char c);
+void	rearrange(int rotations, int **normalized, int size);
 
 #endif

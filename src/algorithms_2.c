@@ -62,7 +62,7 @@ void	chunked_insertion_sort(int chunk_size)
 	lst_size = ft_lstsize(*stack_factory('a'));
 	chunk_max = lst_size - 1;
 	debug_iteration = 0;
-	while (chunk_max > 0)
+	while (chunk_max >= 0)
 	{
 		chunk_min = ((chunk_max - chunk_size) + 1);
 		if (chunk_min < 0)
@@ -179,7 +179,7 @@ static void	reverse_rotate_normalization(int **normalized, int size)
 
 	aux = (*normalized)[size - 1];
 	i = size - 2;
-	while (i > 0)
+	while (i >= 0)
 	{
 		(*normalized)[i + 1] = (*normalized)[i];
 		i--;
@@ -207,10 +207,14 @@ static void	rotate_normalization(int **normalized, int size)
 
 void	found_value(int i, int size, int **normalized)
 {
-	if (((i + 1) / 2) < size)
+	int	rotations;
+
+	rotations = 0;
+	if (i <= (size / 2))
 	{
 		while (i--)
 		{
+			rotations++;
 			rotate_a();
 			rotate_normalization(normalized, size);
 		}
@@ -219,12 +223,33 @@ void	found_value(int i, int size, int **normalized)
 	{
 		while (i++ < size)
 		{
+			rotations--;
 			rra();
 			reverse_rotate_normalization(normalized, size);
 		}
 	}
 	push_b();
 	push_b_norm(normalized, size);
+	size--;
+	rearrange(rotations, normalized, size);
 }
 
-
+void	rearrange(int rotations, int **normalized, int size)
+{
+	if (rotations > 0)
+	{
+		while (rotations--)
+		{
+			rra();
+			reverse_rotate_normalization(normalized, size);
+		}
+	}
+	else
+	{
+		while (rotations++)
+		{
+			rotate_a();
+			rotate_normalization(normalized, size);
+		}
+	}
+}
