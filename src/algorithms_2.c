@@ -55,6 +55,7 @@ void	chunked_insertion_sort(int chunk_size)
 	int	i;
 	int	found;
 	int	debug_iteration;
+	int	top;
 
 	normalized = normalize_input();
 	if (!normalized)
@@ -74,7 +75,9 @@ void	chunked_insertion_sort(int chunk_size)
 		{
 			if (*(normalized + i) >= chunk_min && *(normalized + i) <= chunk_max)
 			{
-				found_value(i, curr_size, &normalized);
+				top = (*normalized);
+				printf("\n\n\tMY TOP: %d\n\n\t", top);
+				found_value(i, curr_size, &normalized, top);
 				curr_size--;
 				found++;
 				i = -1;
@@ -112,6 +115,7 @@ void	push_back(int **normalized, int size, int elems)
 	int	*res;
 	int	aux;
 	int	i;
+	static int norm_index;
 
 	aux = elems;
 	res = malloc(sizeof(int) * (size + elems));
@@ -130,7 +134,7 @@ void	push_back(int **normalized, int size, int elems)
 	}
 	aux = 0;
 	while (aux < elems)
-		*(res + aux++) = INT_MAX;
+		*(res + aux++) = --norm_index;
 	i = 0;
 	while (aux < (size + elems))
 		*(res + aux++) = (*normalized)[i++];
@@ -191,10 +195,6 @@ static void	rotate_normalization(int **normalized, int size)
 	int	i;
 	int	aux;
 
-	fprintf(stderr, " about to rotate %p of length %d\n",
-	(void*)*normalized, size);
-
-	
 	aux = (*normalized)[0];
 	i = 1;
 	while (i < size)
@@ -205,7 +205,7 @@ static void	rotate_normalization(int **normalized, int size)
 	(*normalized)[size - 1] = aux;
 }
 
-void	found_value(int i, int size, int **normalized)
+void	found_value(int i, int size, int **normalized, int top)
 {
 	int	rotations;
 
@@ -231,22 +231,28 @@ void	found_value(int i, int size, int **normalized)
 	push_b();
 	push_b_norm(normalized, size);
 	size--;
-	rearrange(rotations, normalized, size);
+	printf("\n\nENTERING REARRANGE\n\n");
+	ft_lstprnt(*stack_factory('a'));
+	printf("\n\n");
+	rearrange(rotations, normalized, size, top);
+	printf("\n\nLEFT REARRANGE\n\n");
+	ft_lstprnt(*stack_factory('a'));
+	printf("\n\n");
 }
 
-void	rearrange(int rotations, int **normalized, int size)
+void	rearrange(int rotations, int **normalized, int size, int top)
 {
 	if (rotations > 0)
 	{
-		while (rotations--)
+		while ((*normalized)[0] != top)
 		{
 			rra();
 			reverse_rotate_normalization(normalized, size);
 		}
 	}
-	else
+	else if (rotations < 0)
 	{
-		while (rotations++)
+		while ((*normalized)[0] != top)
 		{
 			rotate_a();
 			rotate_normalization(normalized, size);
