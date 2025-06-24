@@ -37,12 +37,13 @@ int	swap_a()
 {
 	char	*move;
 
-	move = malloc(3);
+	move = malloc(4);
 	if (!move)
 		return (0);
 	*move = 's';
 	*(move + 1) = 'a';
-	*(move + 2) = '\0';
+	*(move + 2) = '\n';
+	*(move + 3) = '\0';
 	add_move(move);
 	return (swap('a'));
 }
@@ -51,12 +52,13 @@ int	swap_b()
 {
 	char	*move;
 
-	move = malloc(3);
+	move = malloc(4);
 	if (!move)
 		return (0);
 	*move = 's';
 	*(move + 1) = 'b';
-	*(move + 2) = '\0';
+	*(move + 2) = '\n';
+	*(move + 3) = '\0';
 	add_move(move);
 	return (swap('b'));
 }
@@ -65,12 +67,13 @@ int	ss()
 {
 	char	*move;
 
-	move = malloc(3);
+	move = malloc(4);
 	if (!move)
 		return (0);
 	*move = 's';
 	*(move + 1) = 's';
-	*(move + 2) = '\0';
+	*(move + 2) = '\n';
+	*(move + 3) = '\0';
 	add_move(move);
 	return (swap('a') & swap('b'));
 }

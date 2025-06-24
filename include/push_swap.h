@@ -49,5 +49,6 @@ void	push_back(int **normalized, int size, int elems);
 int	is_ordered(char c);
 void	rearrange(int rotations, int **normalized, int size, int top);
 void	add_move(char *move);
+void	clean_list(void);
 
 #endif

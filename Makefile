@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 SRC_FILES	= push_swap push_swap_utils moves_swap moves_push moves_rotate \
-		  moves_rotate_reverse algorithms_1 algorithms_2
+		  moves_rotate_reverse algorithms_1 algorithms_2 clean_list
 LIBFT		= libft
 SRC_DIR		= src
 OBJ_DIR		= obj

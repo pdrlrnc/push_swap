@@ -19,12 +19,13 @@ int	push_a()
 	t_list	*temp;
 	char	*move;
 
-	move = malloc(3);
+	move = malloc(4);
 	if (!move)
 		return (0);
 	*move = 'p';
 	*(move + 1) = 'a';
-	*(move + 2) = '\0';
+	*(move + 2) = '\n';
+	*(move + 3) = '\0';
 	stack_a = stack_factory('a');
 	stack_b = stack_factory('b');
 	if (*stack_b)
@@ -46,12 +47,13 @@ int	push_b()
 	t_list	*temp;
 	char	*move;
 
-	move = malloc(3);
+	move = malloc(4);
 	if (!move)
 		return (0);
 	*move = 'p';
 	*(move + 1) = 'b';
-	*(move + 2) = '\0';
+	*(move + 2) = '\n';
+	*(move + 3) = '\0';
 	stack_a = stack_factory('a');
 	stack_b = stack_factory('b');
 	if (*stack_a)

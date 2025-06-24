@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/push_swap.h"
 
 static void  putstr_wrapper(void *content)
@@ -59,6 +58,7 @@ int	main(int argv, char **argc)
 		{
 			choose_algorithm(--argv);
 		}
+		clean_list();
 		ft_lstiter(*stack_factory('m'), putstr_wrapper);
 		ft_lstclear(stack_factory('a'), free);
 		ft_lstclear(stack_factory('b'), free);
