@@ -96,8 +96,10 @@ void	choose_algorithm(int elements)
 	 	hardcoded_4();
 	else if (elements == 5)
 		hardcoded_5();
-	else if (elements < 100)
-		chunked_insertion_sort(4);
+	else if (elements < 50)
+		chunked_insertion_sort(10);
+	else
+		radix();
 }
 
 t_list	**stack_factory(char c)
