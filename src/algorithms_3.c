@@ -43,6 +43,7 @@ void	radix(void)
 	}
 }
 
+
 int	get_max_index_normalized(int *normalized, int size)
 {
 	int	i;
