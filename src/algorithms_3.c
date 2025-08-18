@@ -39,8 +39,12 @@ void	radix(void)
 			push_a();
 		bits++;
 		if (is_ordered('a'))
+		{
+			free(normalized);
 			return ;
+		}
 	}
+	free(normalized);
 }
 
 

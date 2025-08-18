@@ -120,8 +120,6 @@ void	choose_algorithm(int elements)
 	 	hardcoded_4();
 	else if (elements == 5)
 		hardcoded_5();
-	else if (elements < 50)
-		chunked_insertion_sort(10);
 	else
 		radix();
 }
@@ -153,16 +151,14 @@ int	ft_create_stack(char *argc)
 
 	stack = stack_factory('a');
 	stack_cpy = stack_factory('c');
+	nb = malloc(sizeof(int));
+	if (!nb)
+		return (0);
+	nb_cpy = malloc(sizeof(int));
+	if (!nb_cpy)
+		return (free(nb), 0);
 	if (ft_check_if_zero(argc))
 	{
-		nb = malloc(sizeof(int));
-		if (!nb)
-			return (0);
-		nb_cpy = malloc(sizeof(int));
-		if (!nb_cpy)
-			return (free(nb), 0);
-		*nb = 0;
-		*nb_cpy = 0;
 		if (*stack == NULL)
 		{
 			*stack = ft_lstnew(nb);
@@ -174,14 +170,8 @@ int	ft_create_stack(char *argc)
 			ft_lstadd_back(stack_cpy, ft_lstnew(nb_cpy));
 		}
 	}
-	else
+	else if (ft_str_isdigit(argc))
 	{
-		nb = malloc(sizeof(int));
-		if (!nb)
-			return (0);
-		nb_cpy = malloc(sizeof(int));
-		if (!nb_cpy)
-			return (0);
 		if (ft_atoi(argc) > INT_MAX || ft_atoi(argc) < INT_MIN)
 			return (free(nb), free(nb_cpy), 0);
 		*nb = ft_atoi(argc);
@@ -199,8 +189,10 @@ int	ft_create_stack(char *argc)
 			ft_lstadd_back(stack_cpy, ft_lstnew(nb_cpy));
 		}
 	}
+	else
+		return (free(nb), free(nb_cpy),(0));
 	if (!*stack)
-		return (free(nb),(0));
+		return (free(nb), free(nb_cpy),(0));
 	return (1);
 }
 /*void	test_moves()
