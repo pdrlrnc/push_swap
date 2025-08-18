@@ -39,6 +39,8 @@ all: $(PRINTF_LIB) headers $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDRS) | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@ctags -R .
+	@echo "tags\n.gitignore\nchecker_linux" > .gitignore
 
 $(OBJ_DIR):
 	@mkdir -p $@
