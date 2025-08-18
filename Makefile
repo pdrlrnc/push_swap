@@ -3,51 +3,72 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedde-so <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: you <you@42.fr>                             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/05/28 16:43:33 by pedde-so          #+#    #+#              #
-#    Updated: 2025/05/28 16:43:36 by pedde-so         ###   ########.fr        #
+#    Created: 2025/07/18 09:50:19 by you               #+#    #+#              #
+#    Updated: 2025/07/18 10:10:00 by you               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-SRC_FILES	= push_swap push_swap_utils moves_swap moves_push moves_rotate \
-		  moves_rotate_reverse algorithms_1 algorithms_2 clean_list algorithms_3
-LIBFT		= libft
-SRC_DIR		= src
-OBJ_DIR		= obj
-INC_DIR		= include
-NAME		= push_swap
 
-CC			= cc
-RM			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror -I$(INC_DIR)
-LDFLAGS		= -L$(LIBFT) -lft
+NAME        = push_swap
 
-SRC			= $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC_FILES)))
-OBJ			= $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC_FILES)))
+SRC_FILES   = push_swap algorithms_1 algorithms_2 algorithms_3 clean_list moves_push \
+	      moves_rotate moves_rotate_reverse moves_swap push_swap_utils
+SRC_DIR     = src
+OBJ_DIR     = obj
+INC_DIR     = include
 
-all: $(NAME)
+PRINTF_URL  = https://github.com/pdrlrnc/ft_printf.git
+PRINTF_DIR  = ft_printf
+PRINTF_LIB  = $(PRINTF_DIR)/libftprintf.a
+
+CC          = cc -g -O0
+CFLAGS      = -Wall -Wextra -Werror -I$(INC_DIR)
+RM          = rm -rf
+
+DEF_COLOUR  = \033[0;39m
+TURQUOISE   = \033[38;2;64;224;208m
+
+SRC         = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC_FILES)))
+OBJ         = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC_FILES)))
+HDRS        = $(INC_DIR)/push_swap.h $(INC_DIR)/printf.h $(INC_DIR)/libft.h
+
+.PHONY: all clean fclean re headers
+
+all: $(PRINTF_LIB) headers $(NAME)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDRS) | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) -g $(CFLAGS) -c $< -o $@
-	@ctags -R $(SRC_DIR)
+$(NAME): $(OBJ) $(PRINTF_LIB)
+	@$(CC) $(CFLAGS) $(OBJ) -L$(PRINTF_DIR) -lftprintf -o $(NAME)
 
-$(NAME): $(OBJ)
-	@make -s -C $(LIBFT)
-	@make bonus -s -C $(LIBFT)
-	@$(CC) -g $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+$(PRINTF_DIR):
+	@git clone --depth 1 $(PRINTF_URL) $(PRINTF_DIR)
+
+$(PRINTF_LIB): | $(PRINTF_DIR)
+	@$(MAKE) --no-print-directory -C $(PRINTF_DIR)
+
+headers: $(INC_DIR)/printf.h $(INC_DIR)/libft.h
+
+$(INC_DIR)/printf.h: $(PRINTF_LIB)
+	@mkdir -p $(INC_DIR)
+	@cp $(PRINTF_DIR)/include/printf.h $(INC_DIR)/printf.h
+
+$(INC_DIR)/libft.h: $(PRINTF_LIB)
+	@mkdir -p $(INC_DIR)
+	@cp $(PRINTF_DIR)/include/libft.h $(INC_DIR)/libft.h
 
 clean:
 	@$(RM) $(OBJ_DIR)
-	@make clean -s -C $(LIBFT)
 
 fclean: clean
-	@$(RM) $(NAME) libft.a
-	@make fclean -s -C $(LIBFT)
+	@$(RM) $(NAME)
+	@$(RM) $(INC_DIR)/printf.h $(INC_DIR)/libft.h 
+	@$(RM) -r $(PRINTF_DIR)
 
 re: fclean all
-
-.PHONY: all clean fclean re
 

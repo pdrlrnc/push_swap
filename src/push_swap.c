@@ -14,7 +14,7 @@
 
 static void  putstr_wrapper(void *content)
 {
-    ft_putstr((char *)content);
+	ft_printf("%s", (char *) content);
 }
 
 int	main(int argv, char **argc)
@@ -40,6 +40,7 @@ int	main(int argv, char **argc)
 				i++;
 			}
 			argv = i + 1;
+			ft_splitfree(inputs);
 		}
 		else
 		{

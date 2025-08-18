@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 #include "libft.h"
+#include "printf.h"
 #include "clean_list.h"
 #include <unistd.h>
 #include <limits.h>
