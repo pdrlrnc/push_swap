@@ -12,118 +12,49 @@
 
 #include "../include/push_swap.h"
 
-static void	clean_list_reverse(void)
+void	clean_list(t_params params)
 {
-	int	done;
-	t_list	*prev;
-	t_list	*head;
-	t_list	*next;
-	t_list	*aux;
-	char	*ra;
-	char	*rra;
-
-	ra = "ra\n";
-	rra = "rra\n";
-	done = 0;
-	while (!done)
+	params.done = 0;
+	while (!params.done)
 	{
-		done = 1;
-		prev = NULL;
-		head = *(stack_factory('m'));
-		if (!head)
+		params.done = 1;
+		params.prev = NULL;
+		params.head = *(stack_factory('m'));
+		if (!params.head)
 			break;
-		next = (*(stack_factory('m')))->next;
-		while (next)
+		params.next = (*(stack_factory('m')))->next;
+		while (params.next)
 		{
-			if (!ft_strncmp((const char *) head->content, (const char *)rra, 2))
+			if (!ft_strncmp((const char *) params.head->content, (const char *)params.mv_1, ft_strlen(params.mv_1)))
 			{
-				if (!ft_strncmp((const char *) next->content, (const char *)ra, 3))
+				if (!ft_strncmp((const char *) params.next->content, (const char *)params.mv_2, ft_strlen(params.mv_2)))
 				{
-					done = 0;
-					aux = next->next;
-					ft_lstdelone(head, free);
-					ft_lstdelone(next, free);
-					if (prev == NULL)
+					params.done = 0;
+					params.aux = params.next->next;
+					ft_lstdelone(params.head, free);
+					ft_lstdelone(params.next, free);
+					if (params.prev == NULL)
 					{
-						(*(stack_factory('m'))) = aux;
-						head = *(stack_factory('m'));
-						next = (*(stack_factory('m')))->next;
+						(*(stack_factory('m'))) = params.aux;
+						params.head = *(stack_factory('m'));
+						params.next = (*(stack_factory('m')))->next;
 					}
 					else
 					{
-						prev->next = aux;
-						if (!prev->next)
+						params.prev->next = params.aux;
+						if (!params.prev->next)
 							break;
-						head = prev->next;
-						next = head->next;
+						params.head = params.prev->next;
+						params.next = params.head->next;
 					}
 
 				}
 			}
-				prev = head;
-				head = next;
-				if (!next)
+				params.prev = params.head;
+				params.head = params.next;
+				if (!params.next)
 					break;
-				next = next->next;
+				params.next = params.next->next;
 		}
 	}
 }
-
-void	clean_list(void)
-{
-	int	done;
-	t_list	*prev;
-	t_list	*head;
-	t_list	*next;
-	t_list	*aux;
-	char	*ra;
-	char	*rra;
-
-	ra = "ra\n";
-	rra = "rra\n";
-	done = 0;
-	while (!done)
-	{
-		done = 1;
-		prev = NULL;
-		head = *(stack_factory('m'));
-		if (!head)
-			break;
-		next = (*(stack_factory('m')))->next;
-		while (next)
-		{
-			if (!ft_strncmp((const char *) head->content, (const char *)ra, 2))
-			{
-				if (!ft_strncmp((const char *) next->content, (const char *)rra, 3))
-				{
-					done = 0;
-					aux = next->next;
-					ft_lstdelone(head, free);
-					ft_lstdelone(next, free);
-					if (prev == NULL)
-					{
-						(*(stack_factory('m'))) = aux;
-						head = *(stack_factory('m'));
-						next = (*(stack_factory('m')))->next;
-					}
-					else
-					{
-						prev->next = aux;
-						if (!prev->next)
-							break;
-						head = prev->next;
-						next = head->next;
-					}
-
-				}
-			}
-				prev = head;
-				head = next;
-				if (!next)
-					break;
-				next = next->next;
-		}
-	}
-	clean_list_reverse();
-}
-

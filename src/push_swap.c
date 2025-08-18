@@ -55,15 +55,38 @@ int	main(int argv, char **argc)
 			}
 		}
 		if (valid && ft_input_is_valid())
-		{
 			choose_algorithm(--argv);
-		}
-		clean_list();
+		clean_list_all_moves();
 		ft_lstiter(*stack_factory('m'), putstr_wrapper);
 		ft_lstclear(stack_factory('a'), free);
 		ft_lstclear(stack_factory('b'), free);
 		ft_lstclear(stack_factory('c'), free);
+		ft_lstclear(stack_factory('m'), free);
 	}
+}
+
+void	clean_list_all_moves(void)
+{
+	t_params	params;
+
+	params.mv_1 = "ra";
+	params.mv_2 = "rra";
+	clean_list(params);
+	params.mv_1 = "rra";
+	params.mv_2 = "ra";
+	clean_list(params);
+	params.mv_1 = "rb";
+	params.mv_2 = "rrb";
+	clean_list(params);
+	params.mv_1 = "rrb";
+	params.mv_2 = "rb";
+	clean_list(params);
+	params.mv_1 = "pa";
+	params.mv_2 = "pb";
+	clean_list(params);
+	params.mv_1 = "pb";
+	params.mv_2 = "pa";
+	clean_list(params);
 }
 
 int	ft_input_is_valid(void)

@@ -32,6 +32,7 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) -g $(CFLAGS) -c $< -o $@
+	@ctags -R $(SRC_DIR)
 
 $(NAME): $(OBJ)
 	@make -s -C $(LIBFT)

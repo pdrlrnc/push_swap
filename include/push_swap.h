@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 #include "libft.h"
+#include "clean_list.h"
 #include <unistd.h>
 #include <limits.h>
 
@@ -49,7 +50,6 @@ void	push_back(int **normalized, int size, int elems);
 int	is_ordered(char c);
 void	rearrange(int rotations, int **normalized, int size, int top);
 void	add_move(char *move);
-void	clean_list(void);
 void	radix(void);
 int	get_max_index_normalized(int *normalized, int size);
 

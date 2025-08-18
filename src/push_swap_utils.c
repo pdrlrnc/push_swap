@@ -20,7 +20,7 @@ int	is_ordered(char c)
 	head = *stack_factory(c);
 	while (head->next)
 	{
-		if (head->content > (head->next)->content)
+		if (*(int *)head->content > *(int *)(head->next)->content)
 			return (0);
 		head = head->next;
 	}
