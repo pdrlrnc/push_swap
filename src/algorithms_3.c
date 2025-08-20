@@ -56,29 +56,3 @@ int	get_max_index(void)
 	}
 	return (max);
 }
-
-
-int	get_max_index_normalized(int *normalized, int size)
-{
-	int	i;
-	int	max;
-	t_list	*stack_a;
-
-	i = 0;
-	max = *normalized;
-	while (i < size)
-	{
-		if (*(normalized + i) > max)
-			max = *(normalized + i);
-		i++;
-	}
-	i = 0;
-	stack_a = *stack_factory('a');
-	while (stack_a)
-	{
-		*(int *)(stack_a->content) = *(normalized + i);
-		stack_a = stack_a->next;
-		i++;
-	}
-	return (max);
-}

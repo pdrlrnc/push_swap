@@ -20,12 +20,9 @@
 #include <limits.h>
 
 int	ft_start_stack(t_list *stack, char *argc);
-int	ft_isspace(char c);
-int	ft_check_if_zero(char *str);
 int	get_min_index(char c);
 int	get_max_index(void);
 t_list	**stack_factory(char c);
-int	ft_create_stack(char *argc);
 int	swap_a(void);
 int	swap_b(void);
 int	ss(void);
@@ -42,22 +39,13 @@ void	hardcoded_2(void);
 void	hardcoded_3(void);
 void	hardcoded_4(void);
 void	hardcoded_5(void);
-int	ft_input_is_valid(void);
-void	bubble_sort_cpy(void);
-void	chunked_insertion_sort(int chunk_size);
-int	*normalize_input(void);
-void	found_value(int i, int size, int **normalized, int top, int first);
-void	push_back(int **normalized, int size, int elems);
 int	is_ordered(char c);
-void	rearrange(int rotations, int **normalized, int size, int top);
 void	add_move(char *move);
 void	radix(void);
-int	get_max_index_normalized(int *normalized, int size);
 int	string_args(char **argc);
 int	value_args(int argv, char **argc);
 int	add_to_stack(char *argc);
 int	normalize_lst(void);
 void	bubble_sort_arr(int *arr, int size);
-int	get_max_index(void);
 
 #endif

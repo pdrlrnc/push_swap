@@ -27,32 +27,12 @@ int	is_ordered(char c)
 	return (1);
 }
 
-int	ft_isspace(char c)
+void	add_move(char *move)
 {
-	if (c == ' ' || c == '\f' || c == '\n')
-		return (1);
-	if (c == '\r' || c == '\t' || c == '\v')
-		return (1);
-	return (0);
-}
-
-int	ft_check_if_zero(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (*(str + i))
-	{
-		if (ft_isspace(*(str + i)))
-			i++;
-		else if (*(str + i) == '0')
-				return (1);
-		else
-			return (0);
-	}
-	return (0);
+	if (!stack_factory('m'))
+		*stack_factory('m') = ft_lstnew(move);
+	else
+		ft_lstadd_back(stack_factory('m'), ft_lstnew(move));
 }
 
 int	get_min_index(char c)
@@ -77,73 +57,4 @@ int	get_min_index(char c)
 		i++;
 	}
 	return (min_index);
-}
-
-static void	copy_a(void)
-{
-	t_list	*curr_a;
-	t_list	*curr_cpy;
-
-	curr_a = *(stack_factory('a'));
-	curr_cpy = *(stack_factory('c'));
-	while (curr_a)
-	{
-		(*(int *)(curr_cpy->content)) = *((int *)(curr_a->content));
-
-		curr_a = curr_a->next;
-		curr_cpy = curr_cpy->next;
-	}
-}
-
-void	bubble_sort_cpy(void)
-{
-	int	sorted;
-	t_list	*prev;
-	t_list	*curr;
-	t_list	*next;
-	t_list	*aux;
-	
-	copy_a();
-	sorted = 0;
-	while (!sorted)
-	{
-		sorted = 1;
-		prev = NULL;
-		curr = *(stack_factory('c'));
-		next = (*(stack_factory('c')))->next;
-		while (next)
-		{
-			if ((*(int *)curr->content) > (*(int *)next->content))
-			{
-				sorted = 0;
-				if (prev == NULL)
-				{
-					curr->next = next->next;
-					next->next = curr;
-					*(stack_factory('c')) = next;
-				}
-				else
-				{
-					aux = next->next;
-					prev->next = next;
-					next->next = curr;
-					curr->next = aux;
-				}
-			}
-			if (prev == NULL)
-				prev = *(stack_factory('c'));
-			else
-				prev = curr;
-			curr = next;
-			next = next->next;
-		}	
-	}
-}
-
-void	add_move(char *move)
-{
-	if (!stack_factory('m'))
-		*stack_factory('m') = ft_lstnew(move);
-	else
-		ft_lstadd_back(stack_factory('m'), ft_lstnew(move));
 }

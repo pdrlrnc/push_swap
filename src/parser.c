@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include <stdio.h>
 
 int	string_args(char **argc)
 {
@@ -31,8 +32,6 @@ int	string_args(char **argc)
 		while (inputs[i] && valid)
 			valid = add_to_stack(inputs[i++]);
 	}
-	if (!valid)
-		write(1, "Error\n", 6);
 	ft_splitfree(inputs);
 	return (valid);
 }
@@ -49,8 +48,6 @@ int	value_args(int argv, char **argc)
 	i = 1;
 	while ((i < argv) && valid)
 		valid = add_to_stack(argc[i++]);
-	if (!valid)
-		write(1, "Error\n", 6);
 	return (valid);
 }
 
@@ -61,7 +58,7 @@ int	add_to_stack(char *argc)
 	nb = malloc(sizeof(int));
 	if (!nb)
 		return (0);
-	if (ft_atoi(argc) > INT_MAX || ft_atoi(argc) < INT_MIN)
+	if (ft_atoi_l(argc) > INT_MAX || ft_atoi_l(argc) < INT_MIN)
 		return (free(nb), (0));
 	*nb = ft_atoi(argc);
 	if (ft_lst_contains_int(*(stack_factory('a')), nb))

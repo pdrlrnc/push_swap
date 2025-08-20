@@ -31,8 +31,10 @@ int	main(int argv, char **argc)
 		{
 			valid = normalize_lst();
 			if (valid && !is_ordered('a'))
-				choose_algorithm(--argv);
+				choose_algorithm(ft_lstsize(*stack_factory('a')));
 		}
+		else 
+			write(2, "Error\n", 6);
 		clean_list_all_moves();
 		ft_lstiter(*stack_factory('m'), putstr_wrapper);
 		ft_lstclear(stack_factory('a'), free);
@@ -66,26 +68,6 @@ void	clean_list_all_moves(void)
 	clean_list(params);
 }
 
-int	ft_input_is_valid(void)
-{
-	t_list	*inner_stack;
-	t_list	*outter_stack;
-
-	outter_stack = *(stack_factory('a'));
-	while (outter_stack)
-	{
-		inner_stack = outter_stack->next;
-		while (inner_stack)
-		{
-			if (*(int *)(outter_stack->content) == *(int *)(inner_stack->content))
-				return (write(1, "Error\n", 6), 0);
-			inner_stack = inner_stack->next;
-		}
-		outter_stack = outter_stack->next;
-	}
-	return (1);
-}
-
 void	choose_algorithm(int elements)
 {
 	if (elements == 2)
@@ -116,58 +98,4 @@ t_list	**stack_factory(char c)
 	if (c == 'm')
 		return (&moves);
 	return (NULL);
-}
-
-int	ft_create_stack(char *argc)
-{
-	int	*nb;
-	int	*nb_cpy;
-	t_list	**stack;
-	t_list	**stack_cpy;
-
-	stack = stack_factory('a');
-	stack_cpy = stack_factory('c');
-	nb = malloc(sizeof(int));
-	if (!nb)
-		return (0);
-	nb_cpy = malloc(sizeof(int));
-	if (!nb_cpy)
-		return (free(nb), 0);
-	if (ft_check_if_zero(argc))
-	{
-		if (*stack == NULL)
-		{
-			*stack = ft_lstnew(nb);
-			*stack_cpy = ft_lstnew(nb_cpy);
-		}
-		else
-		{
-			ft_lstadd_back(stack, ft_lstnew(nb));
-			ft_lstadd_back(stack_cpy, ft_lstnew(nb_cpy));
-		}
-	}
-	else if (ft_str_isdigit(argc))
-	{
-		if (ft_atoi(argc) > INT_MAX || ft_atoi(argc) < INT_MIN)
-			return (free(nb), free(nb_cpy), 0);
-		*nb = ft_atoi(argc);
-		if (*nb == 0)
-			return (free(nb), 0);
-		*nb_cpy = ft_atoi(argc);
-		if (stack == NULL)
-		{
-			*stack = ft_lstnew(nb);
-			*stack_cpy = ft_lstnew(nb_cpy);
-		}
-		else
-		{
-			ft_lstadd_back(stack, ft_lstnew(nb));
-			ft_lstadd_back(stack_cpy, ft_lstnew(nb_cpy));
-		}
-	}
-	else
-		return (free(nb), free(nb_cpy),(0));
-	if (!*stack)
-		return (free(nb), free(nb_cpy),(0));
-	return (1);
 }
