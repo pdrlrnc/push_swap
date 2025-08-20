@@ -35,6 +35,16 @@ static int	clean_lst_swp(t_params *params)
 	return (0);
 }
 
+static int	clean_lst_next(t_params *params)
+{
+	params->prev = params->head;
+	params->head = params->next;
+	if (!params->next)
+		return (1);
+	params->next = (params->next)->next;
+	return (0);
+}
+
 void	clean_list(t_params params)
 {
 	params.done = 0;
@@ -55,16 +65,11 @@ void	clean_list(t_params params)
 				if (!ft_strncmp((const char *) params.next
 						->content, (const char *)params
 						.mv_2, ft_strlen(params.mv_2)))
-				{
 					if (clean_lst_swp(&params))
 						break ;
-				}
 			}
-			params.prev = params.head;
-			params.head = params.next;
-			if (!params.next)
+			if (clean_lst_next(&params))
 				break ;
-			params.next = params.next->next;
 		}
 	}
 }

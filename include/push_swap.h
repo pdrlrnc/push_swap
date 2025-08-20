@@ -47,7 +47,4 @@ void	add_move(char *move);
 void	radix(void);
 t_list	**stack_factory(char c);
 
-/**DEBUG FUNCTIONS CANT BE DELIVERED**/
-void	print_lst(char c);
-
 #endif

@@ -34,7 +34,7 @@ int	main(int argv, char **argc)
 				choose_algorithm(ft_lstsize(*stack_factory('a')));
 		}
 		else
-			write(2, "Error\n", 6);
+			ft_printf("Error\n");
 		clean_list_all_moves();
 		ft_lstiter(*stack_factory('m'), putstr_wrapper);
 		ft_lstclear(stack_factory('a'), free);
