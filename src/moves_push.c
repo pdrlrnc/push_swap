@@ -12,7 +12,7 @@
 
 #include "../include/push_swap.h"
 
-int	push_a()
+int	push_a(void)
 {
 	t_list	**stack_a;
 	t_list	**stack_b;
@@ -40,7 +40,7 @@ int	push_a()
 	return (0);
 }
 
-int	push_b()
+int	push_b(void)
 {
 	t_list	**stack_a;
 	t_list	**stack_b;

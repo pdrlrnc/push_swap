@@ -12,7 +12,7 @@
 
 #include "../include/push_swap.h"
 
-static void  putstr_wrapper(void *content)
+static void	putstr_wrapper(void *content)
 {
 	ft_printf("%s", (char *) content);
 }
@@ -20,20 +20,20 @@ static void  putstr_wrapper(void *content)
 int	main(int argv, char **argc)
 {
 	int	valid;
+	int	i;
 
 	if (argv > 1)
 	{
-		if (argv == 2)
-			valid = string_args(argc);	
-		else
-			valid = value_args(argv, argc);
+		i = 1;
+		while (i < argv)
+			valid = string_args(argc[i++]);
 		if (valid)
 		{
 			valid = normalize_lst();
 			if (valid && !is_ordered('a'))
 				choose_algorithm(ft_lstsize(*stack_factory('a')));
 		}
-		else 
+		else
 			write(2, "Error\n", 6);
 		clean_list_all_moves();
 		ft_lstiter(*stack_factory('m'), putstr_wrapper);
@@ -75,7 +75,7 @@ void	choose_algorithm(int elements)
 	else if (elements == 3)
 		hardcoded_3();
 	else if (elements == 4)
-	 	hardcoded_4();
+		hardcoded_4();
 	else if (elements == 5)
 		hardcoded_5();
 	else
@@ -84,17 +84,14 @@ void	choose_algorithm(int elements)
 
 t_list	**stack_factory(char c)
 {
-	static	t_list *stack_a;
-	static	t_list *stack_b;
-	static	t_list *stack_a_cpy;
-	static	t_list	*moves;
+	static t_list	*stack_a;
+	static t_list	*stack_b;
+	static t_list	*moves;
 
 	if (c == 'a')
 		return (&stack_a);
 	if (c == 'b')
 		return (&stack_b);
-	if (c == 'c')
-		return (&stack_a_cpy);
 	if (c == 'm')
 		return (&moves);
 	return (NULL);

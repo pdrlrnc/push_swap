@@ -38,7 +38,7 @@ static int	rotate_generic(char c)
 	return (0);
 }
 
-int	rr()
+int	rr(void)
 {
 	char	*move;
 
@@ -53,7 +53,7 @@ int	rr()
 	return (rotate_generic('a') & rotate_generic('b'));
 }
 
-int	rotate_b()
+int	rotate_b(void)
 {
 	char	*move;
 
@@ -68,7 +68,7 @@ int	rotate_b()
 	return (rotate_generic('b'));
 }
 
-int	rotate_a()
+int	rotate_a(void)
 {
 	char	*move;
 

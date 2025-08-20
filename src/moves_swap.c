@@ -33,7 +33,7 @@ static int	swap(char c)
 	return (0);
 }
 
-int	swap_a()
+int	swap_a(void)
 {
 	char	*move;
 
@@ -48,7 +48,7 @@ int	swap_a()
 	return (swap('a'));
 }
 
-int	swap_b()
+int	swap_b(void)
 {
 	char	*move;
 
@@ -63,7 +63,7 @@ int	swap_b()
 	return (swap('b'));
 }
 
-int	ss()
+int	ss(void)
 {
 	char	*move;
 

@@ -13,7 +13,7 @@
 #include "../include/push_swap.h"
 #include <stdio.h>
 
-int	string_args(char **argc)
+int	string_args(char *argc)
 {
 	int		i;
 	int		valid;
@@ -21,7 +21,7 @@ int	string_args(char **argc)
 
 	i = 0;
 	valid = 1;
-	inputs = ft_split(argc[1], ' ');
+	inputs = ft_split(argc, ' ');
 	if (!inputs || !inputs[0])
 		return (0);
 	while (inputs[i] && valid)
@@ -33,21 +33,6 @@ int	string_args(char **argc)
 			valid = add_to_stack(inputs[i++]);
 	}
 	ft_splitfree(inputs);
-	return (valid);
-}
-
-int	value_args(int argv, char **argc)
-{
-	int	i;
-	int	valid;
-
-	i = 1;
-	valid = 1;
-	while ((i < argv) && valid)
-		valid = ft_str_isdigit(argc[i++]);
-	i = 1;
-	while ((i < argv) && valid)
-		valid = add_to_stack(argc[i++]);
 	return (valid);
 }
 
@@ -82,7 +67,10 @@ static int	normalize_lst_cont(int lst_size, int *values)
 		while (i < lst_size)
 		{
 			if (*(values + i) == *(int *)lst->content)
+			{
 				*(int *)lst->content = i;
+				break ;
+			}
 			i++;
 		}
 		lst = lst->next;

@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_list.h                                       :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedde-so <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/16 14:10:57 by pedde-so          #+#    #+#             */
-/*   Updated: 2025/08/16 14:10:58 by pedde-so         ###   ########.fr       */
+/*   Created: 2025/08/20 16:24:17 by pedde-so          #+#    #+#             */
+/*   Updated: 2025/08/20 16:24:19 by pedde-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLEAN_LIST_H
-# define CLEAN_LIST_H
+#include "../include/push_swap.h"
 
-typedef struct s_params
+void	print_lst(char c)
 {
-	int		done;
-	t_list	*prev;
-	t_list	*head;
-	t_list	*next;
-	t_list	*aux;
-	char	*mv_1;
-	char	*mv_2;
-}	t_params;
+	t_list	*lst;
 
-void	clean_list(t_params params);
-void	clean_list_all_moves(void);
-
-#endif
+	lst = *(stack_factory(c));
+	while (lst)
+	{
+		ft_printf("%d\n", *(int *)lst->content);
+		lst = lst->next;
+	}
+}

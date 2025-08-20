@@ -13,7 +13,8 @@
 NAME        = push_swap
 
 SRC_FILES   = push_swap algorithms_1 algorithms_3 clean_list moves_push \
-	      moves_rotate moves_rotate_reverse moves_swap push_swap_utils parser algorithms_4
+	      moves_rotate moves_rotate_reverse moves_swap push_swap_utils parser \
+	      algorithms_4 debug
 SRC_DIR     = src
 OBJ_DIR     = obj
 INC_DIR     = include

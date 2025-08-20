@@ -24,9 +24,9 @@ void	hardcoded_2(void)
 void	hardcoded_3(void)
 {
 	t_list	**stack_a;
-	int	first;
-	int	second;
-	int	third;
+	int		first;
+	int		second;
+	int		third;
 
 	stack_a = stack_factory('a');
 	first = *((int *)(*stack_a)->content);

@@ -38,9 +38,9 @@ void	add_move(char *move)
 int	get_min_index(char c)
 {
 	t_list	*curr;
-	int	min;
-	int	min_index;
-	int	i;
+	int		min;
+	int		min_index;
+	int		i;
 
 	curr = *(stack_factory(c));
 	min = *((int *)(curr)->content);
