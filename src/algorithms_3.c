@@ -14,15 +14,13 @@
 
 void	radix(void)
 {
-	int	*normalized;
 	int	size;
 	int	max;
 	int	bits;
 	int	i;
 
-	normalized = normalize_input();
 	size = ft_lstsize(*stack_factory('a'));
-	max = get_max_index_normalized(normalized, size);
+	max = get_max_index();
 	bits = 0;
 	while ((max >> bits) != 0)
 	{
@@ -39,12 +37,24 @@ void	radix(void)
 			push_a();
 		bits++;
 		if (is_ordered('a'))
-		{
-			free(normalized);
 			return ;
-		}
 	}
-	free(normalized);
+}
+
+int	get_max_index(void)
+{
+	t_list	*stack;
+	int		max;
+
+	stack = *(stack_factory('a'));
+	max = *(int *)stack->content;
+	while (stack)
+	{
+		if (max < *(int *)stack->content)
+			max = *(int *)stack->content;
+		stack = stack->next;
+	}
+	return (max);
 }
 
 

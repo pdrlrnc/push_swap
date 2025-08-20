@@ -19,44 +19,20 @@ static void  putstr_wrapper(void *content)
 
 int	main(int argv, char **argc)
 {
-	int	i;
-	char	**inputs;
 	int	valid;
 
 	if (argv > 1)
 	{
-		valid = 1;
 		if (argv == 2)
-		{
-			i = 0;
-			inputs = ft_split(argc[1], ' ');
-			while (inputs[i] != NULL && valid)
-			{
-				if(!ft_create_stack(inputs[i]))
-				{	
-					valid = 0;
-					write(1, "Error\n", 6);
-				}
-				i++;
-			}
-			argv = i + 1;
-			ft_splitfree(inputs);
-		}
+			valid = string_args(argc);	
 		else
+			valid = value_args(argv, argc);
+		if (valid)
 		{
-			i = 1;
-			while (i < argv && valid)
-			{
-				if (!ft_create_stack(argc[i]))
-				{
-					valid = 0;
-					write(1, "Error\n", 6);
-				}
-				i++;
-			}
+			valid = normalize_lst();
+			if (valid && !is_ordered('a'))
+				choose_algorithm(--argv);
 		}
-		if (valid && ft_input_is_valid())
-			choose_algorithm(--argv);
 		clean_list_all_moves();
 		ft_lstiter(*stack_factory('m'), putstr_wrapper);
 		ft_lstclear(stack_factory('a'), free);
@@ -195,71 +171,3 @@ int	ft_create_stack(char *argc)
 		return (free(nb), free(nb_cpy),(0));
 	return (1);
 }
-/*void	test_moves()
-{
-		ft_lstprnt(*(stack_factory('a')));
-		swap_a('a');
-		printf("\nSWAPPED A\n");
-		ft_lstprnt(*(stack_factory('a')));
-		fflush(stdout);
-		printf("\n\nPUSHED B\nA: ");
-		fflush(stdout);
-		push_b();
-		ft_lstprnt(*(stack_factory('a')));
-		printf("\nB: ");
-		fflush(stdout);
-		ft_lstprnt(*(stack_factory('b')));
-		printf("\n");
-		printf("\nROTATING A: \n");
-		fflush(stdout);
-		rotate_a();
-		ft_lstprnt(*(stack_factory('a')));
-		printf("\n");
-		printf("\nROTATING B: \n");
-		fflush(stdout);
-		rotate_b();
-		ft_lstprnt(*(stack_factory('b')));
-		printf("\n");
-		printf("\nROTATING BOTH: \nA: ");
-		fflush(stdout);
-		rr();
-		ft_lstprnt(*(stack_factory('a')));
-		printf("\nB: ");
-		fflush(stdout);
-		ft_lstprnt(*(stack_factory('b')));
-		printf("\n");
-		printf("\n\nPUSHED B\nA: ");
-		fflush(stdout);
-		push_b();
-		ft_lstprnt(*(stack_factory('a')));
-		printf("\nB: ");
-		fflush(stdout);
-		ft_lstprnt(*(stack_factory('b')));
-		printf("\n");
-		printf("\n\nPUSHED B\nA: ");
-		fflush(stdout);
-		push_b();
-		ft_lstprnt(*(stack_factory('a')));
-		printf("\nB: ");
-		fflush(stdout);
-		ft_lstprnt(*(stack_factory('b')));
-		printf("\n");
-		printf("\nROTATING BOTH: \nA: ");
-		fflush(stdout);
-		rr();
-		ft_lstprnt(*(stack_factory('a')));
-		printf("\nB: ");
-		fflush(stdout);
-		ft_lstprnt(*(stack_factory('b')));
-		printf("\n");
-		printf("\nREVERSE ROTATING BOTH: \nA: ");
-		fflush(stdout);
-		rrr();
-		ft_lstprnt(*(stack_factory('a')));
-		printf("\nB: ");
-		fflush(stdout);
-		ft_lstprnt(*(stack_factory('b')));
-		printf("\n");
-
-
-}*/

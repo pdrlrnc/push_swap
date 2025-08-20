@@ -23,7 +23,7 @@ int	ft_start_stack(t_list *stack, char *argc);
 int	ft_isspace(char c);
 int	ft_check_if_zero(char *str);
 int	get_min_index(char c);
-int	get_max_index(char c);
+int	get_max_index(void);
 t_list	**stack_factory(char c);
 int	ft_create_stack(char *argc);
 int	swap_a(void);
@@ -53,5 +53,11 @@ void	rearrange(int rotations, int **normalized, int size, int top);
 void	add_move(char *move);
 void	radix(void);
 int	get_max_index_normalized(int *normalized, int size);
+int	string_args(char **argc);
+int	value_args(int argv, char **argc);
+int	add_to_stack(char *argc);
+int	normalize_lst(void);
+void	bubble_sort_arr(int *arr, int size);
+int	get_max_index(void);
 
 #endif

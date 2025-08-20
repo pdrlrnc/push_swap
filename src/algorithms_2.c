@@ -104,7 +104,7 @@ void	push_back(int **normalized, int size, int elems)
 		return ;
 	while (aux--)
 	{
-		max_index = get_max_index('b');
+		max_index = get_max_index();
 		if ((max_index / 2) < aux)
 			while (max_index--)
 				rotate_b();
