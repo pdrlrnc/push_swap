@@ -24,8 +24,9 @@ int	main(int argv, char **argc)
 
 	if (argv > 1)
 	{
+		valid = 1;
 		i = 1;
-		while (i < argv)
+		while (i < argv && valid)
 			valid = string_args(argc[i++]);
 		if (valid)
 		{
@@ -34,7 +35,7 @@ int	main(int argv, char **argc)
 				choose_algorithm(ft_lstsize(*stack_factory('a')));
 		}
 		else
-			ft_printf("Error\n");
+			write(STDERR_FILENO, "Error\n", 6);
 		clean_list_all_moves();
 		ft_lstiter(*stack_factory('m'), putstr_wrapper);
 		ft_lstclear(stack_factory('a'), free);
